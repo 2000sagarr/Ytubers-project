@@ -111,3 +111,7 @@ footer .container {
 	top: 30%;
 	left: 0;
 }
+
+.card-img-top{
+	height: 200px;
+}
