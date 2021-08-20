@@ -1,33 +1,33 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <main class="home">
   <div class="top" data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'>
-   {% for slide in sliders %}
-      <div class="top-banner">
+    {% for slide in sliders %}
+    <div class="top-banner">
       <img src="{{slide.photo.url}}" alt="" class="img-fluid w-100" />
       <div class="top-container d-flex flex-column pl-5">
         <h1>{{slide.headline}}</h1>
         <p>{{slide.subtitile}}</p>
         <div>
-          <a href="{{slide.url}}"
+          <a
+            href="{{slide.url}}"
             class="btn btn-accent pl-3 pr-3 text-capitalize font-weight-bold"
           >
             {{slide.button_Text}}
           </a>
         </div>
       </div>
-      </div>
-  {% endfor %}
-  
+    </div>
+    {% endfor %}
   </div>
 
   <section
     class="container d-flex justify-content-center align-items-center mt-4"
   >
-    <form class="row text-center">
+    <form method="GET" action="{% url 'search'  %}" class="row text-center">
       <div class="col-md-auto">
         <div class="form-group mb-2">
           <input
-            type="password"
+            name="keyword"
             class="form-control"
             placeholder="Enter Keywords"
           />
@@ -50,36 +50,42 @@
       class="team slider"
       data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'
     >
-    {% for youtuber in featured_youtubers %}
-       <!-- person 1 -->
+      {% for youtuber in featured_youtubers %}
+      <!-- person 1 -->
       <div class="card border-0 text-center ml-3 mr-3">
         <div class="feature-text">
-          <img
-            src="{{youtuber.photo.url}}"
-            class="card-img-top"
-            alt="team-member"
-          />
+          <a href="{% url 'youtubers_detail' youtuber.id %}">
+            <img
+              src="{{youtuber.photo.url}}"
+              class="card-img-top"
+              alt="team-member"
+            />
+          </a>
+
           <span class="text-left bg-accent font-weight-bold"> Featured </span>
         </div>
         <div class="card-body">
           <h5 class="card-title">{{youtuber.name}}</h5>
           <p class="card-text">{{youtuber.category}}</p>
           <div class="person-description mt-2">
-            <button class="btn btn-accent">City<br>{{youtuber.city}}</button>
-            <button class="btn btn-accent">Age<br>{{youtuber.age}}</button>
-            <button class="btn btn-accent">Height<br>{{youtuber.height}}</button>
+            <button class="btn btn-accent">City<br />{{youtuber.city}}</button>
+            <button class="btn btn-accent">Age<br />{{youtuber.age}}</button>
+            <button class="btn btn-accent">
+              Height<br />{{youtuber.height}}
+            </button>
           </div>
           <div class="person-description mt-2">
-            <button class="btn btn-accent">Crew<br>{{youtuber.crew}}</button>
-            <button class="btn btn-accent">Camera<br>{{youtuber.camera_type}}</button>
-            <button class="btn btn-accent">Subs<br>{{youtuber.subs_count}}M</button>
+            <button class="btn btn-accent">Crew<br />{{youtuber.crew}}</button>
+            <button class="btn btn-accent">
+              Camera<br />{{youtuber.camera_type}}
+            </button>
+            <button class="btn btn-accent">
+              Subs<br />{{youtuber.subs_count}}M
+            </button>
           </div>
         </div>
       </div>
-    {% endfor %}
-     
-
-      
+      {% endfor %}
     </div>
 
     <div class="controls d-flex justify-content-center mt-2 mb-2">
@@ -97,34 +103,41 @@
     </p>
 
     <div class="tubers grid">
-
-    {% for youtuber in youtubers %}
-        <div class="card border-0 text-center">
+      {% for youtuber in youtubers %}
+      <div class="card border-0 text-center">
         <div>
+        <a href="{% url 'youtubers_detail' youtuber.id %}">
           <img
             src="{{youtuber.photo.url}}"
             class="card-img-top"
             alt="team-member"
           />
+        </a>
+          
         </div>
         <div class="card-body">
           <h5 class="card-title">{{youtuber.name}}</h5>
           <p class="card-text">{{youtuber.category}}</p>
           <div class="person-description mt-2">
-            <button class="btn btn-accent">City<br>{{youtuber.city}}</button>
-            <button class="btn btn-accent">Age<br>{{youtuber.age}}</button>
-            <button class="btn btn-accent">Height<br>{{youtuber.height}}</button>
+            <button class="btn btn-accent">City<br />{{youtuber.city}}</button>
+            <button class="btn btn-accent">Age<br />{{youtuber.age}}</button>
+            <button class="btn btn-accent">
+              Height<br />{{youtuber.height}}
+            </button>
           </div>
           <div class="person-description mt-2">
-            <button class="btn btn-accent">Crew<br>{{youtuber.crew}}</button>
-            <button class="btn btn-accent">Camera<br>{{youtuber.camera_type}}</button>
-            <button class="btn btn-accent">Subs<br>{{youtuber.subs_count}}M</button>
+            <button class="btn btn-accent">Crew<br />{{youtuber.crew}}</button>
+            <button class="btn btn-accent">
+              Camera<br />{{youtuber.camera_type}}
+            </button>
+            <button class="btn btn-accent">
+              Subs<br />{{youtuber.subs_count}}M
+            </button>
           </div>
         </div>
       </div>
-   
-    {% endfor %}
-    
+
+      {% endfor %}
     </div>
   </section>
 
@@ -136,7 +149,7 @@
       data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'
     >
       {% for member in team %}
-        <div class="card border-0 text-center ml-3 mr-3">
+      <div class="card border-0 text-center ml-3 mr-3">
         <img
           src="{{member.photo.url}}"
           class="card-img-top"
@@ -157,7 +170,6 @@
       </div>
 
       {% endfor %}
-      
     </div>
 
     <div class="controls d-flex justify-content-center mt-2 mb-2">
